@@ -10,3 +10,7 @@ To convert the key derivation algorithm to Argon2id (needs to be `luks2`, not ye
 To persist `discard` flag:
 
 `sudo cryptsetup --allow-discards --persistent refresh $cryptsetup`
+
+To backup header:
+
+`sudo cryptsetup luksHeaderBackup /dev/$device --header-backup-file $backup`
