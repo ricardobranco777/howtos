@@ -173,6 +173,10 @@ Setup /etc/crypttab (optional for ZFS):
 
 `echo crypt /dev/nvme0n1p2 /dev/null discard,fido2-device=auto | sudo tee /mnt/etc/crypttab`
 
+Rebuild initrd:
+
+`sudo update-initramfs -u -k $(uname -r)`
+
 Fix /etc/fstab keeping /proc and /boot/firmware
 
 ```
