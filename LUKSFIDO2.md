@@ -186,6 +186,10 @@ proc /proc proc defaults 0 0
 EOF
 ```
 
+Not needed with ZFS:
+
+`echo /dev/mapper/crypt / ext4 discard 0 1 | sudo tee -a /mnt/etc/fstab`
+
 Umount filesystems
 
 ```
