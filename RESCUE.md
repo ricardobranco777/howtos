@@ -10,6 +10,17 @@ initrdefi (crypto0)/boot/initrd
 boot
 ```
 
-In UEFI systems:
+SUSE:
 
-`sudo shim-install`
+```
+sudo shim-install
+sudo update-bootloader
+```
+
+Disable so-called "Secure Boot":
+
+`sudo mokutil --disable-validation`
+
+Fix UEFI entries:
+
+`sudo efibootmgr ...`
