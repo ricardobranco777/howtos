@@ -3,6 +3,10 @@ Resize qcow2 file:
 
 `qemu-img resize image.qcow2 +77G`
 
+Get qemu command line used by virt-manager to create a VM:
+
+`virsh domxml-to-native qemu-argv --domain $VM`
+
 Mount qcow2 images:
 
 ```
