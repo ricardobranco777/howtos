@@ -1,4 +1,8 @@
 
+Convert raw image:
+
+`qemu-img convert -f raw -O qcow2 nomadbsd-141R-20240711.amd64.zfs.img nomadbsd.qcow2`
+
 Resize qcow2 file:
 
 `qemu-img resize image.qcow2 +77G`
