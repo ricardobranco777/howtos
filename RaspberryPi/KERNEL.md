@@ -1,32 +1,43 @@
 
 ## Kernel
 
-Cross-compiling the Linux kernel for Raspberry Pi 4b / 5:
-
-On Ubuntu 24.04 VM:
+Compiling the Linux kernel for Raspberry Pi 4b / 5:
 
 ```
-sudo apt install bc bison flex libssl-dev make libc6-dev libncurses5-dev crossbuild-essential-arm64
+sudo apt install bc bison flex libncurses5-dev libssl-dev make
 git clone git@github.com:raspberrypi/linux.git
 cd linux
+# Optional
+make menuconfig
 ```
 
 For Raspbery Pi 5:
 
 ```
 KERNEL=kernel_2712
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2712_defconfig
+make bcm2712_defconfig
 ```
 
 For Raspberry Pi 4b:
 
 ```
 $ KERNEL=kernel8
-$ make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- bcm2711_defconfig
+$ make bcm2711_defconfig
 ```
 
 ```
-make ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- Image modules dtbs
+make -j6 Image.gz modules dtbs
+```
+
+To install:
+
+```
+sudo make -j6 modules_install
+sudo cp /boot/firmware/$KERNEL.img /boot/firmware/$KERNEL-backup.img
+sudo cp arch/arm64/boot/Image.gz /boot/firmware/$KERNEL.img
+sudo cp arch/arm64/boot/dts/broadcom/*.dtb /boot/firmware/
+sudo cp arch/arm64/boot/dts/overlays/*.dtb* /boot/firmware/overlays/
+sudo cp arch/arm64/boot/dts/overlays/README /boot/firmware/overlays/
 ```
 
 More information:
