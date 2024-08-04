@@ -39,6 +39,7 @@ git checkout master
 sh autogen.sh
 ./configure
 make -s -j$(nproc)
+make native-deb
 ```
 
 More information:
