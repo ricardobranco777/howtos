@@ -8,6 +8,12 @@ Optional: Enable PCI Gen3.0
 
 `echo dtparam=pciex1_gen=3 | sudo tee -a /boot/firmware/config.txt`
 
+Add contrib to backports:
+
+```
+echo "deb http://deb.debian.org/debian bookworm-backports main contrib" > /etc/apt/sources.list.d/backports.list
+```
+
 Install systemd from backports
 
 ```
