@@ -5,7 +5,7 @@ To update FreeBSD port:
 - Remove `distinfo`
 - Run `make fetch` to fetch dependencies
 - Run `make makesum` to update distinfo
-- Run `gomod-vendor` (needs ports-mgmt/modules2tuple) and copy `GH_TUPLE=` lines to Makefile 
+- Run `make gomod-vendor` (needs ports-mgmt/modules2tuple) and copy `GH_TUPLE=` lines to Makefile 
 - Run `make makesum` to update distinfo
 - Run `portlint .`
 
