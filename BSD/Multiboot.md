@@ -8,7 +8,17 @@ Notes:
 ## Install FreeBSD
 
 Install FreeBSD and choose a swap partition with a size large enough to accomodate the rest of the systems,
-then resize this swap partition from FreeBSD.
+then resize this swap partition from FreeBSD:
+
+```
+swap_device=$(grep swap /etc/fstab | awk '{ print $1 }')
+swapinfo
+swapoff $swap_device
+gpart show
+gpart resize -i 3 -s 8g ${swap_device%p*}
+swapon $swap_device
+swapinfo
+```
 
 ## Install NetBSD & OpenBSD
 
@@ -48,9 +58,13 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 
 ## Create UEFI entries
 
-FreeBSD creates its own.  I did this for NetBSD & OpenBSD:
+FreeBSD creates its own.  I did this on Linux for NetBSD & OpenBSD:
 
 ```
-uuid=$(sudo blkid -s UUID -o value /dev/sda1)
+netbsd_partition=$(sudo fdisk -l /dev/sda | grep NetBSD | awk '{ print $1 }')
+uuid=$(sudo blkid -s PARTUUID -o value $netbsd_partition)
 sudo efibootmgr -v -c -P "$uuid" -l "\efi\netbsd\bootx64.efi" -L NetBSD
+uuid=$(sudo blkid -s PARTUUID -o value /dev/sda1)
+openbsd_partition=$(sudo fdisk -l /dev/sda | grep OpenBSD | awk '{ print $1 }')
+sudo efibootmgr -v -c -P "$uuid" -l "\efi\openbsd\bootx64.efi" -L OpenBSD
 ```
