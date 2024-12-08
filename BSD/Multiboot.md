@@ -16,6 +16,7 @@ swapinfo
 swapoff $swap_device
 gpart show
 gpart resize -i 3 -s 8g ${swap_device%p*}
+gpart modify -i 3 -l swap0 ${swap_device%p*}
 swapon $swap_device
 swapinfo
 ```
