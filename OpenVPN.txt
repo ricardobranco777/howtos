@@ -1,0 +1,7 @@
+
+Equivalent Systemd command to `nmcli conn up MYVPN --ask`:
+
+```
+nmcli connection export MYVPN /etc/openvpn/MYVPN.conf
+systemctl start openvpn@MYVPN
+```
