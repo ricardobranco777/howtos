@@ -11,7 +11,7 @@ cd linux
 make menuconfig
 ```
 
-For Raspbery Pi 5:
+For Raspberry Pi 5:
 
 ```
 KERNEL=kernel_2712
