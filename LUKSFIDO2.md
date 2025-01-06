@@ -200,6 +200,17 @@ proc /proc proc defaults 0 0
 EOF
 ```
 
+Make `boot-firmware.mount` work after ZFS mounts:
+
+```
+sudo mkdir -p /mnt/etc/systemd/system/boot-firmware.mount.d
+cat <<EOF | sudo tee /etc/systemd/system/boot-firmware.mount.d/override.conf
+[Unit]
+After=zfs-import.target zfs-mount.service
+Requires=zfs-mount.service
+EOF
+```
+
 Not needed with ZFS:
 
 `echo /dev/mapper/crypt / ext4 discard 0 1 | sudo tee -a /mnt/etc/fstab`
