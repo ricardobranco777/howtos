@@ -33,6 +33,8 @@ Install cryptsetup & FIDO2 packages
 
 Install initramfs hook for FIDO2
 
+`sudo sed -i 's/^MODULES=.*/MODULES=most/' /etc/initramfs-tools/initramfs.conf`
+
 ```
 cat <<- 'EOF' | sudo tee /etc/initramfs-tools/hooks/libfido2_hook
 #!/bin/sh
@@ -187,7 +189,7 @@ Populate filesystem
 
 Setup /etc/crypttab:
 
-`echo crypt /dev/nvme0n1p2 /dev/null discard,fido2-device=auto | sudo tee /mnt/etc/crypttab`
+`echo crypt /dev/nvme0n1p2 /dev/null luks,discard,fido2-device=auto,initramfs | sudo tee /mnt/etc/crypttab`
 
 Fix /etc/fstab keeping /proc and /boot/firmware
 
