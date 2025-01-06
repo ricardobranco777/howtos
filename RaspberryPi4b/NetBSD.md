@@ -47,4 +47,8 @@ nc -l 8888 > $HOME/.ssh/authorized_keys
 
 - Add `log` to `/` partition in /etc/fstab
 
+- Comment first uncommented line in `/usr/pkg/etc/pkgin/repositories.conf` and then:
+
+`pkgin update && pkgin upgrade`
+
 
