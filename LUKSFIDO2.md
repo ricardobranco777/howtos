@@ -11,7 +11,7 @@ Optional: Enable PCI Gen3.0
 Add contrib to backports:
 
 ```
-echo "deb http://deb.debian.org/debian bookworm-backports main contrib" > /etc/apt/sources.list.d/backports.list
+echo "deb http://deb.debian.org/debian bookworm-backports main contrib" | sudo tee -a /etc/apt/sources.list.d/backports.list
 ```
 
 Install systemd from backports
@@ -27,9 +27,9 @@ sudo apt update ; sudo apt upgrade
 sudo reboot
 ```
 
-Install FIDO2 packages
+Install cryptsetup & FIDO2 packages
 
-`sudo apt install fido2-tools`
+`sudo apt install cryptsetup-bin cryptsetup-initramfs fido2-tools`
 
 Install initramfs hook for FIDO2
 
@@ -66,6 +66,12 @@ fi
 EOF
 ```
 
+Give it executable permissions:
+
+```
+sudo chmod a+x /etc/initramfs-tools/hooks/libfido2_hook
+```
+
 Install ZFS from backports
 
 ```
@@ -74,6 +80,9 @@ Package: src:zfs-linux
 Pin: release n=bookworm-backports
 Pin-Priority: 990
 EOF
+
+# Accept license
+sudo debconf-set-selections <<< "zfs-dkms zfs-dkms/note-incompatible-licenses boolean true"
 
 # NOTE: We use --no-install-recommends to avoid headers for older kernels
 sudo apt install --no-install-recommends zfs-dkms zfsutils-linux zfs-initramfs zfs-zed
@@ -89,17 +98,18 @@ Rebuild initrd
 
 `sudo update-initramfs -u -k $(uname -r)`
 
-Cleanup disk & partions
+Cleanup disk & partitions
 
 ```
 sudo blkdiscard -vf /dev/nvme0n1
-sudo sfdisk --delete /dev/nvme0n1
 ```
 
 Create partitions
 
 ```
 echo -e '2048,1048576,c,*\n1050624,,83' | sudo sfdisk /dev/nvme0n1
+# Note: Do NOT name it "BOOT" because of
+# https://github.com/raspberrypi/firmware/issues/1529
 sudo mkfs.vfat -v /dev/nvme0n1p1
 ```
 
@@ -175,13 +185,9 @@ Populate filesystem
 
 `sudo rsync --archive --verbose --one-file-system --acls --xattrs / /mnt/`
 
-Setup /etc/crypttab (optional for ZFS):
+Setup /etc/crypttab:
 
 `echo crypt /dev/nvme0n1p2 /dev/null discard,fido2-device=auto | sudo tee /mnt/etc/crypttab`
-
-Rebuild initrd:
-
-`sudo update-initramfs -u -k $(uname -r)`
 
 Fix /etc/fstab keeping /proc and /boot/firmware
 
@@ -201,16 +207,17 @@ Umount filesystems
 ```
 sudo zfs unmount -a
 sudo umount -v /mnt
+sudo zpool export rpool
 ```
 
 Close tent
 
 `sudo cryptsetup close crypt`
 
-Now run sudo raspi-config and change boot order in Advanced Options / Boot Order
+Now run `sudo raspi-config` and change boot order in Advanced Options / Boot Order
 
 if you have issues in initramfs shell, toggle the first partition to `83`
-and reboot. SD card will boot. Fix stuff and toggle it back to `0c`
+and reboot. SD card will boot. Fix stuff and toggle it back to `0c`:
 
 ```
 fdisk /dev/nvme0n1
