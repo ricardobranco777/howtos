@@ -12,7 +12,7 @@ To update FreeBSD port:
 NetBSD:
 
 - Edit Makefile to edit DISTNAME and optionally remove PKGREVISION
-- Reset RCS tags setting the first line like this: `# $NetBSD$`
+- Reset RCS tag: `sed -i -e '1s/# \$NetBSD.*/# $NetBSD$/' Makefile`
 - Run `make fetch` to fetch dependencies
 - Run `make show-go-modules > go-modules.mk`
 - Run `make makesum` to update distinfo
