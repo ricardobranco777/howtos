@@ -23,7 +23,7 @@ OpenBSD:
 - Edit version on Makefile
 - Remove `distinfo`
 - Run `go install github.com/$gh_account/$project@latest` to get `MODGO_VERSION`
-- Run `make modgo-gen-modules` > go-modules.mk`
+- Run `make modgo-gen-modules > modules.inc`
 - Run `make makesum` to update distinfo
 - Send uncompressed tarball or diff to ports@openbsd.org
 
@@ -37,3 +37,4 @@ Before submitting:
 More info:
 - https://docs.freebsd.org/en/books/porters-handbook/special/#using-go
 - https://www.netbsd.org/docs/pkgsrc/creating.html
+- https://man.openbsd.org/go-module.5
