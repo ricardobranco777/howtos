@@ -35,5 +35,5 @@ Before submitting:
 - Optionally check compilation on 32-bit arch when using Go 1.22+
 
 More info:
-- https://docs.freebsd.org/en/books/porters-handbook/book/
+- https://docs.freebsd.org/en/books/porters-handbook/special/#using-go
 - https://www.netbsd.org/docs/pkgsrc/creating.html
