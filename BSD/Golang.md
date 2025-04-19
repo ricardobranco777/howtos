@@ -18,6 +18,15 @@ NetBSD:
 - Run `make makesum` to update distinfo
 - Run `pkglint .`
 
+OpenBSD:
+
+- Edit version on Makefile
+- Remove `distinfo`
+- Run `go install github.com/$gh_account/$project@latest` to get `MODGO_VERSION`
+- Run `make modgo-gen-modules` > go-modules.mk`
+- Run `make makesum` to update distinfo
+- Send uncompressed tarball or diff to ports@openbsd.org
+
 Before submitting:
 
 - Test building & installing with `make` & `make install`
