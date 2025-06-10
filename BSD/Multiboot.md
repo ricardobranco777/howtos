@@ -64,8 +64,8 @@ FreeBSD creates its own.  I did this on Linux for NetBSD & OpenBSD:
 ```
 netbsd_partition=$(sudo fdisk -l /dev/sda | grep NetBSD | awk '{ print $1 }')
 uuid=$(sudo blkid -s PARTUUID -o value $netbsd_partition)
-sudo efibootmgr -v -c -P "$uuid" -l "\efi\netbsd\bootx64.efi" -L NetBSD
+sudo efibootmgr -v -c -p "$uuid" -l "\efi\netbsd\bootx64.efi" -L NetBSD
 uuid=$(sudo blkid -s PARTUUID -o value /dev/sda1)
 openbsd_partition=$(sudo fdisk -l /dev/sda | grep OpenBSD | awk '{ print $1 }')
-sudo efibootmgr -v -c -P "$uuid" -l "\efi\openbsd\bootx64.efi" -L OpenBSD
+sudo efibootmgr -v -c -p "$uuid" -l "\efi\openbsd\bootx64.efi" -L OpenBSD
 ```
