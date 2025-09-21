@@ -11,13 +11,14 @@ Install FreeBSD and choose a swap partition with a size large enough to accomoda
 then resize this swap partition from FreeBSD:
 
 ```
-swap_device=$(grep swap /etc/fstab | awk '{ print $1 }')
+swap=$(grep swap /etc/fstab | awk '{ print $1 }')
 swapinfo
-swapoff $swap_device
+swapoff $swap
 gpart show
-gpart resize -i 3 -s 8g ${swap_device%p*}
-gpart modify -i 3 -l swap0 ${swap_device%p*}
-swapon $swap_device
+gpart resize -i 3 -s 8g ${swap%p*}
+# Use .eli to encrypt with geli(8)
+swapon $swap.eli
+sed -i"" -e "/swap/s,$swap,swap.eli," /etc/fstab
 swapinfo
 ```
 
