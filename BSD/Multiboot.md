@@ -1,5 +1,5 @@
 
-Multi-booting FreeBSD 14.x, NetBSD 10.x & OpenBSD 7.x on the same disk
+Multi-booting FreeBSD 15.x, NetBSD 11.x & OpenBSD 7.x on the same disk
 
 Notes:
 - This guide uses UEFI.
