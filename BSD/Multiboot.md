@@ -42,6 +42,8 @@ netbsd# swapon -a
 swapon: adding /dev/dk4 as swap device at priority 777
 ```
 
+Note: Since NetBSD 10 swap is encrypted by default (`vm.swap_encrypt` sysctl is set)
+
 Inside NetBSD you must create a partition for OpenBSD:
 
 `netbsd# gpt add -b 646457344 -s 612368384 -t obsd -l OpenBSD wd0`
