@@ -17,7 +17,7 @@ swapoff $swap
 gpart show
 gpart resize -i 3 -s 8g ${swap%p*}
 # Use .eli to encrypt with geli(8)
-sed -i"" -e "/swap/s,$swap,$swap.eli," /etc/fstab
+sed -i "" -e "/swap/s,$swap,$swap.eli," /etc/fstab
 swapon -a
 swapinfo
 ```
@@ -28,11 +28,12 @@ Inside FreeBSD, create space for NetBSD:
 
 ## Install NetBSD & OpenBSD
 
-When you install NetBSD in its own partition, it may reboot into FreeBSD, in which case
+When you install NetBSD in its own wedge, it may reboot into FreeBSD, in which case
 you may need to copy NetBSD's bootx64.efi (from the USB) into /boot/efi/efi/netbsd/ and
 /boot/efi/efi/boot/ (do not worry about FreeBSD which created its own freebsd directory.
 
-Inside NetBSD you may want to setup the same swap used by FreeBSD:
+Inside NetBSD you may want to setup the same swap used by FreeBSD.
+Note: The installer should detect FreeBSD's swap0, otherwise:
 
 ```
 netbsd# dk=$(dmesg | grep swap | tee /dev/tty | grep -o 'dk[0-9]')
@@ -40,6 +41,7 @@ netbsd# dk=$(dmesg | grep swap | tee /dev/tty | grep -o 'dk[0-9]')
 netbsd# echo /dev/$dk none swap sw,priority=777 0 0 >> /etc/fstab
 netbsd# swapon -a
 swapon: adding /dev/dk4 as swap device at priority 777
+netbsd# swapctl -l
 ```
 
 Note: Since NetBSD 10 swap is encrypted by default (`vm.swap_encrypt` sysctl is set)
