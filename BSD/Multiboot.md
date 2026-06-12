@@ -68,34 +68,7 @@ Both FreeBSD & OpenBSD create their own.  To create it for NetBSD from FreeBSD:
 efibootmgr -a -c -l /boot/efi/EFI/netbsd/bootx64.efi -L NetBSD
 ```
 
-## Configure Grub on any bootable system (optional)
-
-```
-cat > /etc/grub.d/40_custom <<EOF
-#!/bin/sh
-exec tail -n +3 $0
-# This file provides an easy way to add custom menu entries.  Simply type the
-# menu entries you want to add after this comment.  Be careful not to change
-# the 'exec tail' line above.
-
-menuentry "FreeBSD" {
-        insmod part_gpt
-        insmod chain
-        chainloader (hd0,gpt1)/EFI/freebsd/loader.efi
-}
-
-menuentry "NetBSD" {
-        insmod part_gpt
-        insmod chain
-        chainloader (hd0,gpt1)/efi/netbsd/bootx64.efi
-}
-
-menuentry "OpenBSD" {
-        insmod part_gpt
-        insmod chain
-        chainloader (hd0,gpt1)/efi/openbsd/bootx64.efi
-}
-EOF
-
-grub2-mkconfig -o /boot/grub2/grub.cfg
-```
+NOTES:
+- OpenBSD lacks SSD trim so from FreeBSD you can help it with:
+`fsck_ffs -nE /dev/$(gpart show -p | awk '$4 == "openbsd-data" { print $3 }')`
+- On NetBSD you may use `discard` only if you remove the `log` option.
