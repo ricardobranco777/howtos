@@ -46,6 +46,9 @@ netbsd# swapctl -l
 
 Note: Since NetBSD 10 swap is encrypted by default (`vm.swap_encrypt` sysctl is set)
 
+Convert root partition to support extended attributes (and access control lists)
+`fsck_ffs -c ea /`
+
 Inside NetBSD you must create a partition for OpenBSD:
 
 `netbsd# gpt add -b 646457344 -s 612368384 -t obsd -l OpenBSD wd0`
