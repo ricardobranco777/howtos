@@ -58,3 +58,29 @@ make native-deb
 
 More information:
 - [Official documentation](https://openzfs.github.io/openzfs-docs/Developer%20Resources/Building%20ZFS.html)
+
+## Installing Debian backport kernels
+
+The Raspberry Pi kernels suck.  They don't come with BTF or YAMA enabled. See:
+- https://github.com/raspberrypi/linux/issues/5030
+- https://github.com/raspberrypi/linux/issues/6622
+
+Tested on Raspberry Pi4b.  On Raspberry Pi 5 you can use the -64k variants for 64k pages.
+
+Some stuff adapted from:
+https://www.complete.org/live-migrating-from-raspberry-pi-os-bullseye-to-debian-bookworm/
+
+```
+echo deb http://deb.debian.org/debian trixie-backports main contrib | sudo tee /etc/apt/sources.list.d/backports.list
+sudo apt update
+echo "MODULES=most" | sudo tee /etc/initramfs-tools/conf.d/modules.conf
+kernel=7.0.12+deb13-arm64
+# Ignore errors here about manually doing stuff we're going to do anyway:
+sudo apt install linux-image-$kernel
+sudo cp /boot/initrd.img-$kernel /boot/firmware/initrd.img
+sudo cp /boot/vmlinuz-$kernel /boot/firmware/vmlinuz
+# Probably not needed:
+echo KERNEL_ARCH=arm64 | sudo tee -a /etc/default/raspi-firmware
+#   Note: Use same UUID found in /boot/firmware/config.txt
+echo ROOTPART=$(grep -Eo 'PARTUUID=\S+' /boot/firmware/cmdline.txt) | sudo tee -a /etc/default/raspi-firmware
+```
