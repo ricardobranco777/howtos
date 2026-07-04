@@ -26,7 +26,7 @@ Inside FreeBSD, create space for NetBSD:
 
 ## Install NetBSD & OpenBSD
 
-When you install NetBSD in its own wedge, it may reboot into FreeBSD, in which case
+Note: When you install NetBSD, it may reboot into FreeBSD, in which case
 you may need to copy NetBSD's bootx64.efi (from the USB) into /boot/efi/efi/netbsd/ and
 /boot/efi/efi/boot/ (do not worry about FreeBSD which created its own freebsd directory.
 
@@ -68,6 +68,6 @@ efibootmgr -a -c -l /boot/efi/EFI/netbsd/bootx64.efi -L NetBSD
 ```
 
 NOTES:
+- Do not use `log` on NetBSD if you want to use `discard` and mount the FFSv2 partition from FreeBSD
 - OpenBSD lacks SSD trim so from FreeBSD you can help it with:
 `fsck_ffs -nE /dev/$(gpart show -p | awk '$4 == "openbsd-data" { print $3 }')`
-- On NetBSD you may use `discard` only if you remove the `log` option.
