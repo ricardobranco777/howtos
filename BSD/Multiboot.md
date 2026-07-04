@@ -42,10 +42,12 @@ swapon: adding /dev/dk4 as swap device at priority 777
 netbsd# swapctl -l
 ```
 
-Convert root partition to support extended attributes (and access control lists)
+Optional: Convert root partition to support extended attributes (and access control lists)
 `fsck_ffs -c ea /`
 
-Inside NetBSD you must create a partition for OpenBSD:
+Inside NetBSD you must create a partition for OpenBSD in the one of the *Unused* parts:
+
+`gpt show wd0 | grep Unused`
 
 `netbsd# gpt add -b 646457344 -s 612368384 -t obsd -l OpenBSD wd0`
 
