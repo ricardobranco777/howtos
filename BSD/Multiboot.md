@@ -16,8 +16,6 @@ swapinfo
 swapoff $swap
 gpart show
 gpart resize -i 3 -s 8g ${swap%p*}
-# Use .eli to encrypt with geli(8)
-sed -i "" -e "/swap/s,$swap,$swap.eli," /etc/fstab
 swapon -a
 swapinfo
 ```
@@ -43,8 +41,6 @@ netbsd# swapon -a
 swapon: adding /dev/dk4 as swap device at priority 777
 netbsd# swapctl -l
 ```
-
-Note: Since NetBSD 10 swap is encrypted by default (`vm.swap_encrypt` sysctl is set)
 
 Convert root partition to support extended attributes (and access control lists)
 `fsck_ffs -c ea /`
