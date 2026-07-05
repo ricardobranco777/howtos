@@ -30,3 +30,10 @@ Find where the EFI is stored in the disklabel
 # mount -t msdos /dev/sd0i /mnt
 # cp /usr/mdec/BOOTX64.EFI /mnt/efi/openbsd/BOOTX64.EFI
 ```
+
+DragonflyBSD:
+
+```
+# mount -t msdos /dev/nvme0s0 /mnt
+# cp /boot/boot1.efi /mnt/efi/openbsd/BOOTX64.EFI
+```
