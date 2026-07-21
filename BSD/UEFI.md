@@ -31,6 +31,8 @@ Find where the EFI is stored in the disklabel
 # cp /usr/mdec/BOOTX64.EFI /mnt/efi/openbsd/BOOTX64.EFI
 ```
 
+Also downloadable from https://cdn.openbsd.org/pub/OpenBSD/snapshots/amd64/BOOTX64.EFI
+
 DragonflyBSD:
 
 ```
