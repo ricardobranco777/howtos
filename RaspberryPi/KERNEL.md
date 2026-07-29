@@ -77,8 +77,8 @@ echo "MODULES=most" | sudo tee /etc/initramfs-tools/conf.d/modules.conf
 kernel=7.0.12+deb13-arm64
 # Ignore errors here about manually doing stuff we're going to do anyway:
 sudo apt install linux-image-$kernel
-sudo cp /boot/initrd.img-$kernel /boot/firmware/initrd.img
-sudo cp /boot/vmlinuz-$kernel /boot/firmware/vmlinuz
+sudo cp /boot/initrd.img-$kernel /boot/firmware/initramfs8
+sudo cp /boot/vmlinuz-$kernel /boot/vmlinuz
 # Probably not needed:
 echo KERNEL_ARCH=arm64 | sudo tee -a /etc/default/raspi-firmware
 #   Note: Use same UUID found in /boot/firmware/config.txt
