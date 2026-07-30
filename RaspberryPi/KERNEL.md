@@ -79,6 +79,7 @@ kernel=7.0.12+deb13-arm64
 sudo apt install linux-image-$kernel
 sudo cp /boot/initrd.img-$kernel /boot/firmware/initramfs8
 sudo cp /boot/vmlinuz-$kernel /boot/vmlinuz
+sudo cp /boot/cmlinuz-$kernel /boot/firmware/kernel8.img
 # Probably not needed:
 echo KERNEL_ARCH=arm64 | sudo tee -a /etc/default/raspi-firmware
 #   Note: Use same UUID found in /boot/firmware/config.txt
