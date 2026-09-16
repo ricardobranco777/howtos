@@ -229,3 +229,11 @@ Reboot and cross fingers:
 ```
 sudo reboot
 ```
+
+Optional hardening:
+
+```
+sudo sed -i 's/$/  lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
+```
+
+Also run the Ansible playbook from https://github.com/ricardobranco777/ansible-linux
