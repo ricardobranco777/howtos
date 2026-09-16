@@ -16,6 +16,12 @@ sudo apt upgrade ; sudo apt upgrade
 sudo reboot
 ```
 
+Optional: Change hostname:
+
+```
+sudo hostnamectl hostname rpi5.fritz.box
+```
+
 Optional: Enable SSH:
 
 ```
