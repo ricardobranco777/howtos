@@ -177,8 +177,6 @@ sudo chmod 1777 /mnt/tmp
 sudo mkdir -m 755 /mnt/run
 sudo mkdir -m 1777 /mnt/run/lock
 sudo zfs create rpool/var/mail
-sudo zfs create rpool/var/lib/apt
-sudo zfs create rpool/var/lib/dpkg
 sudo zfs create rpool/boot
 sudo mkdir -m755 /mnt/boot/firmware
 ```
