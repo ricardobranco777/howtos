@@ -162,6 +162,8 @@ sudo zfs create rpool/usr/local
 sudo zfs create rpool/var/games
 sudo zfs create rpool/var/lib/AccountsService
 sudo zfs create rpool/var/lib/NetworkManager
+sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/containerd
+sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/containers
 sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/docker
 sudo zfs create -o com.sun:auto-snapshot=false rpool/tmp
 sudo chmod 1777 /mnt/tmp
