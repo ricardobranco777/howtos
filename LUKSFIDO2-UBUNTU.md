@@ -252,3 +252,15 @@ sudo sed -i 's/$/ zswap.enabled=1/' /boot/firmware/current/cmdline.txt
 echo 1 | sudo tee /sys/module/zswap/parameters/enabled
 sudo grep -r . /sys/module/zswap/parameters/ /sys/kernel/debug/zswap/
 ```
+
+Optional: Enable PCI Gen3.0
+
+```
+echo dtparam=pciex1_gen=3 | sudo tee -a /boot/firmware/config.txt
+```
+
+Note: See disclaimer at https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0
+
+More information:
+- https://www.raspberrypi.com/documentation/computers/config_txt.html
+- https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/Debian%20Trixie%20Root%20on%20ZFS.html
