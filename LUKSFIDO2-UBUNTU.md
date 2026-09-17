@@ -240,7 +240,15 @@ sudo sed -i 's/$/  lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe
 
 Also run the Ansible playbook from https://github.com/ricardobranco777/ansible-linux
 
-Configure Docker & Podman for ZFS:
+Optional: Configure Docker & Podman for ZFS:
 
 - Add `"storage-driver": "zfs"` in /etc/docker/daemon.json and restart the service.
 - `echo -e '[storage]\ndriver = "zfs"' > /etc/containers/storage.conf`
+
+Optional: Configure Zswap:
+
+```
+sudo sed -i 's/$/ zswap.enabled=1/' /boot/firmware/current/cmdline.txt
+echo 1 | sudo tee /sys/module/zswap/parameters/enabled
+sudo grep -r . /sys/module/zswap/parameters/ /sys/kernel/debug/zswap/
+```
