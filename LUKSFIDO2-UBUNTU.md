@@ -232,6 +232,13 @@ Reboot and cross fingers:
 sudo reboot
 ```
 
+Backup LUKS header:
+
+```
+# You may want to choose a better place
+sudo cryptsetup luksHeaderBackup /dev/nvme0n1p3 --header-backup-file /root/luks-header-$(date +%F).img
+```
+
 Optional hardening:
 
 ```
