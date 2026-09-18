@@ -242,7 +242,13 @@ sudo cryptsetup luksHeaderBackup /dev/nvme0n1p3 --header-backup-file /root/luks-
 Optional hardening:
 
 ```
-sudo sed -i 's/$/  lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
+sudo sed -i 's/$/ lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
+```
+
+Note: See https://github.com/openzfs/zfs/issues/9910 on performance implications for `init_on_alloc`
+
+```
+sudo sed -i 's/$/ init_on_alloc=1 randomize_kstack_offset=1/' /boot/firmware/current/cmdline.txt
 ```
 
 Remove `ubuntu` user from `lxd` group to prevent LPE described in:
@@ -282,5 +288,6 @@ echo dtparam=pciex1_gen=3 | sudo tee -a /boot/firmware/config.txt
 Note: See disclaimer at https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0
 
 More information:
+- https://ubuntu.com/hardware/docs/boards/explanations/piboot-ab/
 - https://www.raspberrypi.com/documentation/computers/config_txt.html
 - https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/Debian%20Trixie%20Root%20on%20ZFS.html
