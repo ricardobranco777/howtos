@@ -242,7 +242,7 @@ sudo cryptsetup luksHeaderBackup /dev/nvme0n1p3 --header-backup-file /root/luks-
 Optional hardening:
 
 ```
-sudo sed -i 's/$/ lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
+sudo sed -i 's/$/ lsm=lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
 ```
 
 Note: See https://github.com/openzfs/zfs/issues/9910 on performance implications for `init_on_alloc`
