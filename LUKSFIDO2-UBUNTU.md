@@ -252,6 +252,12 @@ https://starlabs.sg/blog/2026/06-old-wine-in-a-new-bottle-a-decade-old-lxd-group
 sudo gpasswd --delete ubuntu lxd
 ```
 
+If you don't plan to use rootless containers, drop the setuid & devices bits:
+
+```
+sudo zfs set setuid=off devices=off rpool/var/tmp rpool/tmp rpool/home
+```
+
 Also run the Ansible playbook from https://github.com/ricardobranco777/ansible-linux
 
 Optional: Configure Docker & Podman for ZFS:
