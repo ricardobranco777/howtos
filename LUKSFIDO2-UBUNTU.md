@@ -245,6 +245,13 @@ Optional hardening:
 sudo sed -i 's/$/  lsm=lockdown,capability,landlock,yama,apparmor,tomoyo,bpf,ipe,ima,evm/' /boot/firmware/current/cmdline.txt
 ```
 
+Remove `ubuntu` user from `lxd` group to prevent LPE described in:
+https://starlabs.sg/blog/2026/06-old-wine-in-a-new-bottle-a-decade-old-lxd-group-root-re-armed/
+
+```
+sudo gpasswd --delete ubuntu lxd
+```
+
 Also run the Ansible playbook from https://github.com/ricardobranco777/ansible-linux
 
 Optional: Configure Docker & Podman for ZFS:
