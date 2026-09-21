@@ -162,8 +162,7 @@ sudo zfs create rpool/usr/local
 sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/containerd
 sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/containers
 sudo zfs create -o com.sun:auto-snapshot=false rpool/var/lib/docker
-sudo zfs create -o com.sun:auto-snapshot=false rpool/tmp
-sudo chmod 1777 /mnt/tmp
+sudo mkdir -m 1777 /mnt/tmp
 sudo mkdir -m 755 /mnt/run
 sudo mkdir -m 755 /mnt/run/lock
 sudo zfs create rpool/var/mail
