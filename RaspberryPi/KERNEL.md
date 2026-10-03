@@ -67,6 +67,8 @@ The Raspberry Pi kernels suck.  They don't come with BTF or YAMA enabled. See:
 
 Tested on Raspberry Pi4b.  On Raspberry Pi 5 you can use the -64k variants for 64k pages.
 
+Note: The kernel shipped by Debian injects `cgroup_disable=memory`.
+
 Some stuff adapted from:
 https://www.complete.org/live-migrating-from-raspberry-pi-os-bullseye-to-debian-bookworm/
 
