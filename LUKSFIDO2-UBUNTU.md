@@ -281,6 +281,12 @@ Optional: Enable PCI Gen3.0
 echo dtparam=pciex1_gen=3 | sudo tee -a /boot/firmware/config.txt
 ```
 
+Optional: Enable phased upgrades:
+
+```
+sudo sh -c "echo 'APT::Get::Always-Include-Phased-Updates "1";' > /etc/apt/apt.conf.d/99custom"
+```
+
 Note: See disclaimer at https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0
 
 More information:
