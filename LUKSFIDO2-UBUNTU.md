@@ -244,7 +244,7 @@ sudo sed -i 's/$/ lsm=lockdown,capability,landlock,yama,apparmor,bpf,ipe,ima,evm
 Note: See https://github.com/openzfs/zfs/issues/9910 on performance implications for `init_on_alloc`
 
 ```
-sudo sed -i 's/$/ init_on_alloc=1 randomize_kstack_offset=1/' /boot/firmware/current/cmdline.txt
+sudo sed -i 's/$/ init_on_alloc=1 init_on_free=1 randomize_kstack_offset=1/' /boot/firmware/current/cmdline.txt
 ```
 
 Remove `ubuntu` user from `lxd` group to prevent LPE described in:
