@@ -287,6 +287,12 @@ Optional: Enable phased upgrades:
 sudo sh -c "echo 'APT::Get::Always-Include-Phased-Updates "1";' > /etc/apt/apt.conf.d/99custom"
 ```
 
+Optional: Enable proposed updates:
+
+```
+sudo sh -c "sed -i '/^Suites: resolute /s/$/ resolute-proposed/' /etc/apt/sources.list.d/ubuntu.sources"
+```
+
 Note: See disclaimer at https://www.raspberrypi.com/documentation/computers/raspberry-pi.html#pcie-gen-3-0
 
 More information:
