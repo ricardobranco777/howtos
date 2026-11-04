@@ -281,6 +281,12 @@ Optional: Enable PCI Gen3.0
 echo dtparam=pciex1_gen=3 | sudo tee -a /boot/firmware/config.txt
 ```
 
+Optional: Use https instead of http
+
+```
+sudo sed -i s/http:/https:/ /etc/apt/sources.list.d/ubuntu.sources
+```
+
 Optional: Enable phased upgrades:
 
 ```
