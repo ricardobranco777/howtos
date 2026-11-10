@@ -79,10 +79,8 @@ sudo apt install linux-raspi
 sudo add-apt-repository ppa:arter97/zfs
 # Accept license
 sudo debconf-set-selections <<< "zfs-dkms zfs-dkms/note-incompatible-licenses boolean true"
-# XXX: Have to force the version here because 2.4.4-2 failed to build for arm64
-version=2.4.4-1arter97~ubuntu26.04.1
 # This will take some time...
-sudo apt install zfs-dkms=$version zfsutils-linux zfs-zed zfs-dracut=$version
+sudo apt install zfs-dracut zfs-dkms zfsutils-linux zfs-zed
 # Reboot so we have ZFS version from PPA
 sudo zfs version
 sudo reboot
