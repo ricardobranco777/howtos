@@ -58,7 +58,10 @@ sudo apt remove rust-coreutils
 sudo apt-mark hold rust-coreutils
 
 # These ship setuid binaries I don't need
-sudo apt remove --auto-remove fuse3 ntfs-3g open-iscsi open-vm-tools
+sudo apt remove --auto-remove --purge fuse3 ntfs-3g open-iscsi open-vm-tools
+# Useless on servers
+sudo apt remove --auto-remove --purge packagekit polkitd
+
 sudo apt autoremove
 ```
 
