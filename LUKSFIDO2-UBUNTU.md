@@ -61,6 +61,8 @@ sudo apt-mark hold rust-coreutils
 sudo apt remove --auto-remove --purge fuse3 ntfs-3g open-iscsi open-vm-tools
 # Useless on servers
 sudo apt remove --auto-remove --purge packagekit polkitd
+# rsyslog may be redundant with systemd-journal
+sudo apt remove --auto-remove --purge rsyslog
 
 sudo apt autoremove
 ```
