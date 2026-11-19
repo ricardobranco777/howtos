@@ -63,8 +63,6 @@ sudo apt remove --auto-remove --purge fuse3 ntfs-3g open-iscsi open-vm-tools
 sudo apt remove --auto-remove --purge packagekit polkitd
 # rsyslog may be redundant with systemd-journal
 sudo apt remove --auto-remove --purge rsyslog
-# cloud-init is useless
-sudo apt remove --auto-remove --purge cloud-init
 
 sudo apt autoremove
 ```
